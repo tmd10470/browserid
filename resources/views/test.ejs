@@ -1,12 +1,12 @@
+<!DOCTYPE html>
 <!-- This Source Code Form is subject to the terms of the Mozilla Public
    - License, v. 2.0. If a copy of the MPL was not distributed with this
    - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
 
-<!doctype html>
-<html>
+<html LANG="<%= lang %>" dir="<%= lang_dir %>">
 	<head>
     <meta charset="utf-8">
-		<link rel="stylesheet" type="text/css" href="qunit.css" />
+		<link rel="stylesheet" type="text/css" href="/test/qunit/qunit.css" />
 		<title>BrowserID QUnit Test</title>
   <!--[if lt IE 9]>
     <script type="text/javascript" src="/lib/html5shim.js"></script>
@@ -57,12 +57,15 @@
     <script type="text/html" id="templateUser">
       <li>{{email}}</li>
     </script>
-    <script type="text/javascript" src="qunit.js"></script>
+    <script type="text/javascript" src="/test/qunit/qunit.js"></script>
     <script type="text/javascript" src="/include.js"></script>
     <script type="text/javascript" src="/lib/jquery-1.7.1.min.js"></script>
     <script type="text/javascript" src="/lib/underscore-min.js"></script>
     <script type="text/javascript" src="/lib/ejs.js"></script>
     <script type="text/javascript" src="/lib/vepbundle.js"></script>
+    <script type="text/javascript" src="/i18n/<%= locale %>/messages.json"></script>
+    <script type="text/javascript" src="/shared/gettext.js"></script>
+
     <script type="text/javascript" src="http://testmob.org/scripts/reporter.js"></script>
     <script type="text/javascript" src="/shared/browserid.js"></script>
     <script type="text/javascript" src="/lib/dom-jquery.js"></script>
@@ -70,12 +73,12 @@
     <script type="text/javascript" src="/lib/module.js"></script>
     <script type="text/javascript" src="/lib/jschannel.js"></script>
     <script type="text/javascript" src="/shared/javascript-extensions.js"></script>
-    <script type="text/javascript" src="qunit/mocks/mocks.js"></script>
-    <script type="text/javascript" src="qunit/mocks/xhr.js"></script>
-    <script type="text/javascript" src="qunit/mocks/templates.js"></script>
-    <script type="text/javascript" src="qunit/mocks/provisioning.js"></script>
-    <script type="text/javascript" src="qunit/mocks/window.js"></script>
-    <script type="text/javascript" src="qunit/mocks/winchan.js"></script>
+    <script type="text/javascript" src="/test/mocks/mocks.js"></script>
+    <script type="text/javascript" src="/test/mocks/xhr.js"></script>
+    <script type="text/javascript" src="/test/mocks/templates.js"></script>
+    <script type="text/javascript" src="/test/mocks/provisioning.js"></script>
+    <script type="text/javascript" src="/test/mocks/window.js"></script>
+    <script type="text/javascript" src="/test/mocks/winchan.js"></script>
     <script type="text/javascript" src="/shared/renderer.js"></script>
     <script type="text/javascript" src="/shared/class.js"></script>
     <script type="text/javascript" src="/shared/mediator.js"></script>
@@ -120,50 +123,50 @@
     <script type="text/javascript" src="/pages/signup.js"></script>
     <script type="text/javascript" src="/pages/verify_email_address.js"></script>
 
-    <script type="text/javascript" src="qunit/testHelpers/helpers.js"></script>
+    <script type="text/javascript" src="/test/testHelpers/helpers.js"></script>
 
-    <script type="text/javascript" src="qunit/include_unit_test.js"></script>
+    <script type="text/javascript" src="/test/cases/include_unit_test.js"></script>
 
-    <script type="text/javascript" src="qunit/pages/browserid_unit_test.js"></script>
-    <script type="text/javascript" src="qunit/pages/page_helpers_unit_test.js"></script>
-    <script type="text/javascript" src="qunit/pages/add_email_address_test.js"></script>
-    <script type="text/javascript" src="qunit/pages/verify_email_address_test.js"></script>
-    <script type="text/javascript" src="qunit/pages/forgot_unit_test.js"></script>
-    <script type="text/javascript" src="qunit/pages/signin_unit_test.js"></script>
-    <script type="text/javascript" src="qunit/pages/signup_unit_test.js"></script>
-    <script type="text/javascript" src="qunit/pages/manage_account_unit_test.js"></script>
+    <script type="text/javascript" src="/test/cases/pages/browserid_unit_test.js"></script>
+    <script type="text/javascript" src="/test/cases/pages/page_helpers_unit_test.js"></script>
+    <script type="text/javascript" src="/test/cases/pages/add_email_address_test.js"></script>
+    <script type="text/javascript" src="/test/cases/pages/verify_email_address_test.js"></script>
+    <script type="text/javascript" src="/test/cases/pages/forgot_unit_test.js"></script>
+    <script type="text/javascript" src="/test/cases/pages/signin_unit_test.js"></script>
+    <script type="text/javascript" src="/test/cases/pages/signup_unit_test.js"></script>
+    <script type="text/javascript" src="/test/cases/pages/manage_account_unit_test.js"></script>
 
-    <script type="text/javascript" src="qunit/shared/helpers_unit_test.js"></script>
-    <script type="text/javascript" src="qunit/shared/renderer_unit_test.js"></script>
-    <script type="text/javascript" src="qunit/shared/screens_unit_test.js"></script>
-    <script type="text/javascript" src="qunit/shared/tooltip_unit_test.js"></script>
-    <script type="text/javascript" src="qunit/shared/error-display_unit_test.js"></script>
-    <script type="text/javascript" src="qunit/shared/browser-support_unit_test.js"></script>
-    <script type="text/javascript" src="qunit/shared/validation_unit_test.js"></script>
-    <script type="text/javascript" src="qunit/shared/storage_unit_test.js"></script>
-    <script type="text/javascript" src="qunit/shared/network_unit_test.js"></script>
-    <script type="text/javascript" src="qunit/shared/user_unit_test.js"></script>
+    <script type="text/javascript" src="/test/cases/shared/helpers_unit_test.js"></script>
+    <script type="text/javascript" src="/test/cases/shared/renderer_unit_test.js"></script>
+    <script type="text/javascript" src="/test/cases/shared/screens_unit_test.js"></script>
+    <script type="text/javascript" src="/test/cases/shared/tooltip_unit_test.js"></script>
+    <script type="text/javascript" src="/test/cases/shared/error-display_unit_test.js"></script>
+    <script type="text/javascript" src="/test/cases/shared/browser-support_unit_test.js"></script>
+    <script type="text/javascript" src="/test/cases/shared/validation_unit_test.js"></script>
+    <script type="text/javascript" src="/test/cases/shared/storage_unit_test.js"></script>
+    <script type="text/javascript" src="/test/cases/shared/network_unit_test.js"></script>
+    <script type="text/javascript" src="/test/cases/shared/user_unit_test.js"></script>
 
-    <script type="text/javascript" src="qunit/resources/internal_api_unit_test.js"></script>
-    <script type="text/javascript" src="qunit/resources/helpers_unit_test.js"></script>
-    <script type="text/javascript" src="qunit/resources/state_machine_unit_test.js"></script>
+    <script type="text/javascript" src="/test/cases/resources/internal_api_unit_test.js"></script>
+    <script type="text/javascript" src="/test/cases/resources/helpers_unit_test.js"></script>
+    <script type="text/javascript" src="/test/cases/resources/state_machine_unit_test.js"></script>
 
-    <script type="text/javascript" src="qunit/controllers/page_unit_test.js"></script>
-    <script type="text/javascript" src="qunit/controllers/code_check_unit_test.js"></script>
-    <script type="text/javascript" src="qunit/controllers/actions_unit_test.js"></script>
-    <script type="text/javascript" src="qunit/controllers/pick_email_unit_test.js"></script>
-    <script type="text/javascript" src="qunit/controllers/add_email_unit_test.js"></script>
-    <script type="text/javascript" src="qunit/controllers/check_registration_unit_test.js"></script>
-    <script type="text/javascript" src="qunit/controllers/authenticate_unit_test.js"></script>
-    <script type="text/javascript" src="qunit/controllers/forgot_password_unit_test.js"></script>
-    <script type="text/javascript" src="qunit/controllers/required_email_unit_test.js"></script>
-    <script type="text/javascript" src="qunit/controllers/verify_primary_user_unit_test.js"></script>
-    <script type="text/javascript" src="qunit/controllers/email_chosen_unit_test.js"></script>
-    <script type="text/javascript" src="qunit/controllers/provision_primary_user_unit_test.js"></script>
-    <script type="text/javascript" src="qunit/controllers/primary_user_provisioned_unit_test.js"></script>
-    <script type="text/javascript" src="qunit/controllers/set_password_unit_test.js"></script>
+    <script type="text/javascript" src="/test/cases/controllers/page_unit_test.js"></script>
+    <script type="text/javascript" src="/test/cases/controllers/code_check_unit_test.js"></script>
+    <script type="text/javascript" src="/test/cases/controllers/actions_unit_test.js"></script>
+    <script type="text/javascript" src="/test/cases/controllers/pick_email_unit_test.js"></script>
+    <script type="text/javascript" src="/test/cases/controllers/add_email_unit_test.js"></script>
+    <script type="text/javascript" src="/test/cases/controllers/check_registration_unit_test.js"></script>
+    <script type="text/javascript" src="/test/cases/controllers/authenticate_unit_test.js"></script>
+    <script type="text/javascript" src="/test/cases/controllers/forgot_password_unit_test.js"></script>
+    <script type="text/javascript" src="/test/cases/controllers/required_email_unit_test.js"></script>
+    <script type="text/javascript" src="/test/cases/controllers/verify_primary_user_unit_test.js"></script>
+    <script type="text/javascript" src="/test/cases/controllers/email_chosen_unit_test.js"></script>
+    <script type="text/javascript" src="/test/cases/controllers/provision_primary_user_unit_test.js"></script>
+    <script type="text/javascript" src="/test/cases/controllers/primary_user_provisioned_unit_test.js"></script>
+    <script type="text/javascript" src="/test/cases/controllers/set_password_unit_test.js"></script>
 
     <!-- must go last or all other tests will fail. -->
-    <script type="text/javascript" src="qunit/controllers/dialog_unit_test.js"></script>
+    <script type="text/javascript" src="/test/cases/controllers/dialog_unit_test.js"></script>
 	</body>
 </html>
