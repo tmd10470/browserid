@@ -217,7 +217,11 @@
               });
             }
             else {
+              startState("doProfile", info);
+              self.emailInfo = info;
+              /*
               startState("doEmailChosen", info);
+              */
             }
             complete();
           }, complete);
@@ -226,6 +230,10 @@
       else {
         throw "invalid email";
       }
+    });
+
+    subscribe("profile_ready", function(msg, data) {
+      startState("doEmailChosen", self.emailInfo);
     });
 
     subscribe("notme", function() {
