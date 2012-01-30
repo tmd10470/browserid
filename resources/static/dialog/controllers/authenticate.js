@@ -155,7 +155,6 @@ BrowserID.Modules.Authenticate = (function() {
       });
 
       $(".newuser,.forgot,.returning,.start").hide();
-
       self.bind("#email", "keyup", emailKeyUp);
       self.bind("#forgotPassword", "click", cancelEvent(forgotPassword));
 
