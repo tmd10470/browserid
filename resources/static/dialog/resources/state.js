@@ -100,8 +100,6 @@ BrowserID.State = (function() {
       addPrimaryUser = !!info.add;
       email = info.email;
 
-      //updateCurrentStateInfo(info);
-
       var idInfo = storage.getEmail(email);
       if(idInfo && idInfo.cert) {
         publish("primary_user_ready", info);
