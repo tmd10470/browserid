@@ -13,7 +13,8 @@ BrowserID.verifyEmailAddress = (function() {
       pageHelpers = bid.PageHelpers,
       helpers = bid.Helpers,
       complete = helpers.complete,
-      doc,
+      win = window,
+      doc = document,
       token,
       redirectTo,
       sc;
@@ -50,6 +51,7 @@ BrowserID.verifyEmailAddress = (function() {
         if (redirectTo && registered) {
           // XXX How can we get this localStorage stuff out of here?
           localStorage.removeItem("redirectTo");
+          win.alert("You are now registered with BrowserID, but the original site you tried signing into is closed.  You will now be redirected to the site and will have to sign in again.");
           doc.location = redirectTo;
           oncomplete();
         }
@@ -72,6 +74,7 @@ BrowserID.verifyEmailAddress = (function() {
 
       token = options.token;
       doc = options.document || window.document;
+      win = options.window || window;
 
       // Save this off early because if the user is not logged in, the storage
       // info will be cleared by time they hit submit.

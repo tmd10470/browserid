@@ -17,7 +17,7 @@
       config = {
         token: "token"
       },
-      docMock;
+      winMock;
 
   module("pages/verify_email_address", {
     setup: function() {
@@ -31,10 +31,11 @@
   });
 
   function createController(options, callback) {
-    docMock = new WindowMock().document;
+    winMock = new WindowMock();
     controller = BrowserID.verifyEmailAddress.create();
     options = options || {};
-    options.document = docMock;
+    options.window = winMock;
+    options.document = winMock.document;
     options.ready = callback;
     controller.start(options);
   }
@@ -130,13 +131,13 @@
   });
 
   asyncTest("submit with good token, both passwords, with redirect - set document.location", function() {
-    localStorage.redirectTo = "redirect_url";
+    localStorage.redirectTo = "http://redirect.to";
     createController({ token: "token" }, function() {
       $("#password").val("password");
       $("#vpassword").val("password");
 
       controller.submit(function() {
-        equal(docMock.location, "redirect_url", "document redirected to redirect_url");
+        equal(winMock.document.location, "http://redirect.to", "document redirected to http://redirect.to");
         equal(localStorage.redirectTo, null, "redirectTo has been cleared");
         start();
       });
