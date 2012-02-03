@@ -32,7 +32,7 @@ BrowserID.verifyEmailAddress = (function() {
     network.emailForVerificationToken(token, function(info) {
       if (info) {
         dom.setInner('#email', info.email);
-        oncomplete();
+        complete(oncomplete);
       }
       else {
         pageHelpers.replaceFormWithNotice("#cannotconfirm", oncomplete);
@@ -41,29 +41,22 @@ BrowserID.verifyEmailAddress = (function() {
   }
 
   function submit(oncomplete) {
-    var pass = dom.getInner("#password"),
-        vpass = dom.getInner("#vpassword");
+    var pass = localStorage.NEW_ACCOUNT_PASSWORD;
 
-    var valid = bid.Validation.passwordAndValidationPassword(pass, vpass);
-
-    if (valid) {
-      network.completeUserRegistration(token, pass, function(registered) {
-        if (redirectTo && registered) {
-          // XXX How can we get this localStorage stuff out of here?
-          localStorage.removeItem("redirectTo");
-          win.alert("You are now registered with BrowserID, but the original site you tried signing into is closed.  You will now be redirected to the site and will have to sign in again.");
-          doc.location = redirectTo;
-          oncomplete();
-        }
-        else {
-          var selector = registered ? "#congrats" : "#cannotcomplete";
-          pageHelpers.replaceFormWithNotice(selector, oncomplete);
-        }
-      }, pageHelpers.getFailure(errors.completeUserRegistration, oncomplete));
-    }
-    else {
-      oncomplete();
-    }
+    network.completeUserRegistration(token, pass, function(registered) {
+      // XXX How can we get this localStorage stuff out of here?
+      localStorage.removeItem("NEW_ACCOUNT_PASSWORD");
+      if (redirectTo && registered) {
+        localStorage.removeItem("redirectTo");
+        win.alert("You are now registered with BrowserID, but the original site you tried signing into is closed.  You will now be redirected to the site and will have to sign in again.");
+        doc.location = redirectTo;
+        complete(oncomplete);
+      }
+      else {
+        var selector = registered ? "#congrats" : "#cannotcomplete";
+        pageHelpers.replaceFormWithNotice(selector, oncomplete);
+      }
+    }, pageHelpers.getFailure(errors.completeUserRegistration, oncomplete));
   }
 
   var Module = bid.Modules.PageModule.extend({
@@ -83,7 +76,8 @@ BrowserID.verifyEmailAddress = (function() {
       sc.start.call(self, options);
 
       showSiteInfo();
-      showEmailAddress(complete.curry(options.ready));
+      showEmailAddress();
+      self.submit(options.ready);
     },
 
     submit: submit

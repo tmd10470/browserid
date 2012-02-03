@@ -75,6 +75,12 @@ BrowserID.Modules.Actions = (function() {
       if(onsuccess) onsuccess(null);
     },
 
+    doStageSecondaryUser: function(info) {
+      localStorage.NEW_ACCOUNT_PASSWORD = info.password;
+      var email = info.email;
+      bid.Helpers.Dialog.createUser.call(this, email);
+    },
+
     doConfirmUser: function(info) {
       startRegCheckService.call(this, info, "waitForUserValidation", "user_confirmed");
     },
